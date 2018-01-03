@@ -18,7 +18,7 @@ Celem tego ćwiczenia jest napisanie prostej aplikacji w JavaScripcie, która po
     * każda żywa komórka z więcej niż trzema żywymi sąsiadami umiera z powodu przeludnienia,
     * każda martwa komórka ożywa, kiedy ma dokładnie trzech żywych sąsiadów.
 
-Użytkownik powinien zadeklarować, na jakiej planszy chce oglądać animacje (podając jej szerokość i wysokość). Powinna wyświetlić mu się plansza ze startową animacją (np. pojedynczym gliderem), na której może on za pomocą kliknięcia myszką włączać i wyłączać poszczególne pola. Poniżej planszy powinny znajdować się przycisk PLAY i PAUSE, które będą uruchamiać lub zatrzymać animację w danym stanie, aby w każdym momencie użytkownik mógł zatrzymać animację, zmienić jej stan i włączyć ją na nowo. 
+Użytkownik powinien zadeklarować, na jakiej planszy chce oglądać animacje (podając jej szerokość i wysokość). Powinna wyświetlić mu się plansza ze startową animacją (np. pojedynczym gliderem), na której może on za pomocą kliknięcia myszką włączać i wyłączać poszczególne pola. Poniżej planszy powinny znajdować się przycisk PLAY i PAUSE, które będą uruchamiać lub zatrzymać animację w danym stanie, aby w każdym momencie użytkownik mógł zatrzymać animację, zmienić jej stan i włączyć ją na nowo.
 
 ##Opiszmy najpierw metody, które musi wykonywać nasz program:
 * Metoda, która buduje odpowiednią planszę na podstawie podanych wartości szerokości i wysokości (ogranicza za pomocą styli CSS `width` i `height` sekcji, tworzy i dodaje do DOMu odpowiednią ilość divów, zapisuje je wszystkie do tablicy i dodaje im event umożliwiający zmianę ich stanu po kliknięciu myszką).
@@ -46,7 +46,7 @@ Będziemy ćwiczyć programownie obiektowe, a więc całą naszą grę napiszemy
 
 **Pamiętaj o odpowiednim użyciu słowa kluczowego this wewnątrz obiektu!**
 
-###2. Budowanie planszy 
+###2. Budowanie planszy
 Zajrzyj do pliku `index.html`. Znajdziesz tam przygotowane dwie sekcje oraz dwa guziki do obsługi animacji.
 Zajrzyj też do pliku `style.css`, znajdującego się w katalogu css. Znajdziesz tam prototyp pliku ze stylami do naszej gry – każde komórka będzie elementem `<div>` znajdującym się w sekcji `#board`, o szerokości 10px i wysokości 10px. Podepnij plik CSS do dokumentu HTML.
 
@@ -61,7 +61,7 @@ Naszą planszą wypełnić musimy komórkami – odpowiednią ilość divów, kt
 Dzięki zastosowaniu `float: left` i ograniczeniu szerokości sekcji `#board` nasza plansza wygląda jak tablica dwuwymiarowa (ma wysokość i szerokość), ale tak naprawdę jest jednym ciągiem divów. Dla łatwiejszego poruszania się po nich zapiszmy wszystkie te divy do zmiennej. W tym celu:
 
 * dodaj do naszego obiektu atrybut `this.cells` i zdefiniuj go jako pustą tablicę
-* w metodzie `createBoard()`, po stworzeniu i dodaniu wszystkich divów do DOMu, złap je do stworzonej zmiennej 
+* w metodzie `createBoard()`, po stworzeniu i dodaniu wszystkich divów do DOMu, złap je do stworzonej zmiennej
 
 Podejrzyj plik `index.html` w przeglądarce. Jeśli wszystko zrobiłeś poprawnie, powinieneś zobaczyć planszę o wymiarach zdefiniowanych przez Ciebie przy powoływaniu obiektu typu `GameOfLife()` do zmiennej `game`.
 
@@ -80,14 +80,14 @@ W tym momencie możemy wskazać konkretną komórkę tylko poprzez jej indeks w 
 
     1. sąsiad: x-1, y-1
     2. sąsiad: x, y-1
-    3. sąsiad: x+1, y1
+    3. sąsiad: x+1, y-1
     4. sąsiad: x-1, y
     5. sąsiad: x+1, y
     6. sąsiad: x-1, y+1
     7. sąsiad: x, y+1
     8. sąsiad: x+1, y+1
 
-Do obiektu dodaj metodę, która przeliczy współrzędne **x** i **y** na indeks tablicy wg. odpowiedniego wzoru. Metoda powinna zwracać element `<div>` o podanych współrzędnych. 
+Do obiektu dodaj metodę, która przeliczy współrzędne **x** i **y** na indeks tablicy wg. odpowiedniego wzoru. Metoda powinna zwracać element `<div>` o podanych współrzędnych.
 
 *podpowiedź:*
 
@@ -109,7 +109,7 @@ Aby łatwiej nam było sprawdzać, czy dobrze programujemy naszą animację stw�
 * ustawienie nowego wyglądu wszystkich komórek na podstawie danych z tej zmiennej
 
 Musimy więc stworzyć 3 metody:
-    
+
     computeCellNextState(x, y)
     computeNextGeneration()
     printNextGeneration()
@@ -147,9 +147,9 @@ Nie zapomnij, że gra powinna powstawać na podstawie wymyślonych przez użytko
 
 Pamiętaj, aby Twój obiekt wykonywał wszystkie niezbędne kroki początkowe (dla porządku możesz zamknąć je w jednej metodzie `start()`).
 
-Jeśli chcesz, możesz zmienić event za pomocą którego użytkownik ożywia i uśmierca komórki – kliknięcie myszką będzie dokładne, ale trudne w użyciu, zamiast tego możesz użyć najechania myszką. 
+Jeśli chcesz, możesz zmienić event za pomocą którego użytkownik ożywia i uśmierca komórki – kliknięcie myszką będzie dokładne, ale trudne w użyciu, zamiast tego możesz użyć najechania myszką.
 
-Jeśli zaś masz jeszcze siłę do dalszego działania, możesz dowolnie usprawnić działanie Twojej aplikacji (np. dodając efekty wizualne lub dźwiękowe). 
+Jeśli zaś masz jeszcze siłę do dalszego działania, możesz dowolnie usprawnić działanie Twojej aplikacji (np. dodając efekty wizualne lub dźwiękowe).
 
 **Gratulacje!**
 
