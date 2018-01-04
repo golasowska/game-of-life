@@ -9,8 +9,8 @@ body {
 }
 
 #board div {
-    width: 10px;
-    height: 10px;
+    width: 20px;
+    height: 20px;
     border: 1px solid #cccccc;
     background-color: #ffffff;
     float: left;
@@ -35,4 +35,18 @@ body {
   margin: 20px auto;
   display: flex;
   justify-content: center;
+}
+
+.start{
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.invisible {
+  display: none;
+}
+
+#start{
+  margin: 0 auto;
 }

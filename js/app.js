@@ -1,18 +1,15 @@
 document.addEventListener('DOMContentLoaded', function (){
 
-  function GameOfLife(boardWidth, boardHeight) {
-    this.width = boardWidth;
-    this.height = boardHeight;
+  function GameOfLife() {
+    this.width = prompt('Podaj szerokość planszy');
+    this.height = prompt('Podaj wysokość planszy');
     this.board = document.querySelector('#board');
     this.cells = [];
-    var self = this;
-    console.log('dyyyssss', this);
-    console.log('selllfff', self);
   };
 
     GameOfLife.prototype.createBoard = function() {
-    this.board.style.width = 10*this.width + 'px';
-    this.board.style.height = 10*this.height + 'px';
+    this.board.style.width = 20*this.width + 'px';
+    this.board.style.height = 20*this.height + 'px';
     var allCells = this.width * this.height;
 
     for (var i = 0; i < allCells; i++) {
@@ -20,10 +17,7 @@ document.addEventListener('DOMContentLoaded', function (){
       newDiv.setAttribute('id', i)
       this.board.appendChild(newDiv);
       this.cells.push(newDiv);
-
     };
-
-    // console.log('divki', this.cells[1000].style.left);
 
     this.cells.forEach(function(elem){
       elem.addEventListener('click', liveToggle);
@@ -32,8 +26,6 @@ document.addEventListener('DOMContentLoaded', function (){
     function liveToggle (e){
       this.classList.toggle('live')
     };
-    // console.log(allCells);
-    // console.log(game.cells);
   };
 
   GameOfLife.prototype.position = function(x,y) {
@@ -109,7 +101,6 @@ document.addEventListener('DOMContentLoaded', function (){
   GameOfLife.prototype.computeCellNextState = function(x,y){
     var liveNeighbor = [];
     var neighbors = this.createNeighbors(x,y);
-    // console.log('sasiedzi ', neighbors);
 
     neighbors.forEach(function(elem){
       if(elem.classList.contains('live')) {
@@ -117,21 +108,15 @@ document.addEventListener('DOMContentLoaded', function (){
       };
       return liveNeighbor;
     });
-    // console.log('zywiiii', liveNeighbor);
     if (this.position(x,y).classList.contains('live')&&liveNeighbor.length<2) {
-      // console.log('op 1 zerooooo');
       return 0;
     } else if (this.position(x,y).classList.contains('live')&&liveNeighbor.length===2 || this.position(x,y).classList.contains('live')&&liveNeighbor.length===3) {
-      // console.log('op2 jedeeeen');
         return 1;
       } else if (this.position(x,y).classList.contains('live')&&liveNeighbor.length>3) {
-        // console.log('op3 zerooooo');
         return 0;
     } else if ((!this.position(x,y).classList.contains('live'))&& liveNeighbor.length===3) {
-      console.log('op4 jedeeeen');
       return 1;
     } else {
-      // console.log('op5 zerooooo');
       return 0;
     };
   };
@@ -141,10 +126,8 @@ document.addEventListener('DOMContentLoaded', function (){
     for (var y = 0; y < this.height; y++) {
       for (var x = 0; x < this.width; x++) {
         nextGeneration.push(this.computeCellNextState(x,y));
-        // console.log('next generationnnnn','x:', x, 'y:', y, nextGeneration);
       }
     };
-    console.log('next generationnnnn', nextGeneration);
     return nextGeneration;
   };
 
@@ -157,7 +140,6 @@ document.addEventListener('DOMContentLoaded', function (){
         this.cells[i].classList.remove('live');
       }
     }
-    console.log('thisss cellls', this.cells);
     return this.cells
   };
 
@@ -165,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function (){
     var self = this;
     var interval = setInterval(function(){
       self.printNextGeneration();
-    }, 1000);
+    }, 100);
     var pause = document.querySelector('#pause');
     pause.addEventListener('click', pauseAnimation);
     function pauseAnimation(e) {
@@ -182,40 +164,15 @@ document.addEventListener('DOMContentLoaded', function (){
     };
   };
 
-  // function startAnim() {
-  //   var interval = setInterval(function(){
-  //     game.printNextGeneration();
-  //   }, 1000);
-  //   var pause = document.querySelector('#pause');
-  //   pause.addEventListener('click', pauseAnimation);
-  //   function pauseAnimation(e) {
-  //     clearInterval(interval)
-  //   };
-  // };
-  //
-  // var play = document.querySelector('#play');
-  // play.addEventListener('click', startAnimation);
-  // function startAnimation(e) {
-  //   startAnim();
-  // };
-
-
-  var game = new GameOfLife (5,5, board);
-  game.createBoard();
-  // game.createNeighbors(0,0);
-  game.setCellState(0,0, 'live');
-  game.firstGlider(3,3, 'live');
-  // game.computeCellNextState(3,3);
-  game.computeNextGeneration();
-  game.play();
-  // game.printNextGeneration();
-  console.log('position', game.position(1,1));
-
-
-
-
-
-
-
+  var start = document.querySelector('#start');
+  start.addEventListener('click', startGame);
+  function startGame(){
+    var game = new GameOfLife();
+    game.createBoard();
+    game.firstGlider(3,3, 'live');
+    game.play();
+    document.querySelector('#play').classList.remove('invisible');
+    document.querySelector('#pause').classList.remove('invisible');
+  }
 
 })
