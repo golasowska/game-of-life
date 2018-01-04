@@ -143,6 +143,19 @@ document.addEventListener('DOMContentLoaded', function (){
     };
     console.log('next generationnnnn', nextGeneration);
     return nextGeneration;
+  };
+
+  GameOfLife.prototype.printNextGeneration = function () {
+    var states = this.computeNextGeneration();
+    for (var i = 0; i < states.length; i++) {
+      if (states[i]===1) {
+          this.cells[i].classList.add('live');
+      } else {
+        this.cells[i].classList.remove('live');
+      }
+    }
+    console.log('thisss cellls', this.cells);
+    return this.cells
   }
 
 
@@ -152,10 +165,11 @@ document.addEventListener('DOMContentLoaded', function (){
   var game = new GameOfLife (5,5, board);
   game.createBoard();
   // game.createNeighbors(0,0);
-  // game.setCellState(0,0, 'live');
+  game.setCellState(0,0, 'live');
   game.firstGlider(3,3, 'live');
   // game.computeCellNextState(3,3);
   game.computeNextGeneration();
+  game.printNextGeneration();
   console.log('position', game.position(1,1));
 
 
