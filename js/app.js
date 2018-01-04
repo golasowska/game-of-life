@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', function (){
     this.height = boardHeight;
     this.board = document.querySelector('#board');
     this.cells = [];
+    var self = this;
+    console.log('dyyyssss', this);
+    console.log('selllfff', self);
   };
 
     GameOfLife.prototype.createBoard = function() {
@@ -156,10 +159,45 @@ document.addEventListener('DOMContentLoaded', function (){
     }
     console.log('thisss cellls', this.cells);
     return this.cells
-  }
+  };
 
+  GameOfLife.prototype.startAnimation = function () {
+    var self = this;
+    var interval = setInterval(function(){
+      self.printNextGeneration();
+    }, 1000);
+    var pause = document.querySelector('#pause');
+    pause.addEventListener('click', pauseAnimation);
+    function pauseAnimation(e) {
+      clearInterval(interval)
+    };
+  };
 
+  GameOfLife.prototype.play = function() {
+    var self = this;
+    var butPlay = document.querySelector('#play');
+    butPlay.addEventListener('click', startAnimation);
+    function startAnimation(e) {
+      self.startAnimation();
+    };
+  };
 
+  // function startAnim() {
+  //   var interval = setInterval(function(){
+  //     game.printNextGeneration();
+  //   }, 1000);
+  //   var pause = document.querySelector('#pause');
+  //   pause.addEventListener('click', pauseAnimation);
+  //   function pauseAnimation(e) {
+  //     clearInterval(interval)
+  //   };
+  // };
+  //
+  // var play = document.querySelector('#play');
+  // play.addEventListener('click', startAnimation);
+  // function startAnimation(e) {
+  //   startAnim();
+  // };
 
 
   var game = new GameOfLife (5,5, board);
@@ -169,7 +207,8 @@ document.addEventListener('DOMContentLoaded', function (){
   game.firstGlider(3,3, 'live');
   // game.computeCellNextState(3,3);
   game.computeNextGeneration();
-  game.printNextGeneration();
+  game.play();
+  // game.printNextGeneration();
   console.log('position', game.position(1,1));
 
 
