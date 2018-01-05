@@ -5,19 +5,19 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #cccccc;
+    background-color: #f6f6f8;
 }
 
 #board div {
     width: 20px;
     height: 20px;
-    border: 1px solid #cccccc;
+    border: 1px solid #f6f6f8;
     background-color: #ffffff;
     float: left;
 }
 
 #board div.live {
-    background-color: #000000;
+    background-color: #44aec6;
 }
 
 #board {
@@ -49,4 +49,9 @@ body {
 
 #start{
   margin: 0 auto;
+}
+
+#play,
+#pause{
+  margin: 10px;
 }
